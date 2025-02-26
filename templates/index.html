@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang='sv'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>QR Kod Generator</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; background-color: #2c3e50; color: white; }
+        .container { background: #34495e; padding: 20px; border-radius: 10px; display: inline-block; box-shadow: 0 4px 8px rgba(0,0,0,0.1); color: white; }
+        input, button { padding: 10px; margin: 10px; width: 80%; border-radius: 5px; border: 1px solid #ccc; }
+        input { background-color: white; color: black; }
+        button { background-color: #27ae60; color: white; border: none; cursor: pointer; }
+        button:hover { background-color: #2ecc71; }
+        img { margin-top: 20px; }
+        .qr-list { margin-top: 30px; }
+        .qr-list img { display: block; margin: 10px auto; max-width: 150px; border: 2px solid white; padding: 5px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>QR Kod Generator</h1>
+        <form method='post'>
+            <input type='text' name='url' placeholder='Ange URL' required>
+            <button type='submit'>Generera QR Kod</button>
+        </form>
+        {% if qr_img %}
+            <img src="data:image/png;base64,{{ qr_img }}" alt="QR Kod">
+        {% endif %}
+    </div>
+    
+    <div class="qr-list">
+        <h2>Tidigare skapade QR Koder</h2>
+        {% for qr in qr_codes %}
+            <img src="data:image/png;base64,{{ qr }}" alt="QR Kod">
+        {% endfor %}
+    </div>
+</body>
+</html>
